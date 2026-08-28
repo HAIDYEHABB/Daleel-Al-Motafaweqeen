@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "405166012261",
+    "project_id": "daleel-al-motafawqeen",
+    "storage_bucket": "daleel-al-motafawqeen.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405166012261:android:1730ee1dda41075d07938c",
+        "android_client_info": {
+          "package_name": "com.example.daleel_al_motafawqeen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhy5HdmojgdpedBECCBmWg6pXEq-cwRKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
