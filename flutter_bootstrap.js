@@ -35,8 +35,14 @@ if (!window._flutter) {
 }
 _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b17f","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
 
+
+// Auto-select renderer:
+// - HTML renderer on mobile (fixes Arabic font rendering with CanvasKit)
+// - CanvasKit on desktop (better graphics performance)
+const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
 _flutter.loader.load({
-  serviceWorkerSettings: {
-    serviceWorkerVersion: "1300079695" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */
-  }
+  config: {
+    renderer: isMobile ? "html" : "canvaskit",
+  },
 });
