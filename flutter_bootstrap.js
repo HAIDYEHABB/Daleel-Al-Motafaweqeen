@@ -36,16 +36,19 @@ if (!window._flutter) {
 _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b17f","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
 
 
-// Force HTML renderer: patch the build config so Flutter's loader
-// accepts our renderer preference without a build mismatch error.
-// The app was compiled as dart2js which works with both renderers —
-// CanvasKit breaks Arabic text; HTML renderer uses the browser's
-// native text engine which handles Arabic perfectly.
-if (window._flutter && _flutter.buildConfig && _flutter.buildConfig.builds) {
-  _flutter.buildConfig.builds.forEach(function(build) {
-    build.renderer = "html";
-  });
-}
+// Override the renderer to "html" after buildConfig is set.
+// We modify the existing builds array in-place so the loader finds
+// a matching build when config.renderer = "html" is requested.
+(function() {
+  try {
+    var builds = _flutter.buildConfig && _flutter.buildConfig.builds;
+    if (builds) {
+      for (var i = 0; i < builds.length; i++) {
+        builds[i].renderer = 'html';
+      }
+    }
+  } catch(e) {}
+})();
 
 _flutter.loader.load({
   config: {
