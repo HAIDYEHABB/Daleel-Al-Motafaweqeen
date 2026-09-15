@@ -36,22 +36,11 @@ if (!window._flutter) {
 _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b17f","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
 
 
-// Override the renderer to "html" after buildConfig is set.
-// We modify the existing builds array in-place so the loader finds
-// a matching build when config.renderer = "html" is requested.
-(function() {
-  try {
-    var builds = _flutter.buildConfig && _flutter.buildConfig.builds;
-    if (builds) {
-      for (var i = 0; i < builds.length; i++) {
-        builds[i].renderer = 'html';
-      }
-    }
-  } catch(e) {}
-})();
-
 _flutter.loader.load({
-  config: {
-    renderer: "html",
-  },
+  onEntrypointLoaded: async function(engineInitializer) {
+    const appRunner = await engineInitializer.initializeEngine({
+      renderer: "html",
+    });
+    await appRunner.runApp();
+  }
 });
