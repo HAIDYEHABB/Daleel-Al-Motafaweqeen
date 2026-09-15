@@ -36,13 +36,13 @@ if (!window._flutter) {
 _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b17f","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
 
 
-// Auto-select renderer:
-// - HTML renderer on mobile (fixes Arabic font rendering with CanvasKit)
-// - CanvasKit on desktop (better graphics performance)
-const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-
+// Force HTML renderer on all platforms.
+// CanvasKit (the default) breaks Arabic text rendering because it uses
+// its own font engine that doesn't handle RTL/Arabic shaping correctly
+// with bundled TTF files. The HTML renderer delegates text to the browser
+// which always handles Arabic properly.
 _flutter.loader.load({
   config: {
-    renderer: isMobile ? "html" : "canvaskit",
+    renderer: "html",
   },
 });
