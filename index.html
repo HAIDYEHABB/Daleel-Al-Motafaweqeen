@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="/Daleel-Al-Motafaweqeen/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="دليل المتفوقين">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="daleel_al_motafawqeen">
+  <meta name="apple-mobile-web-app-title" content="دليل المتفوقين">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>daleel_al_motafawqeen</title>
+  <title>دليل المتفوقين</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Load Cairo font from Google Fonts CDN BEFORE Flutter/CanvasKit starts.
+       CanvasKit on mobile uses the browser font cache — loading Cairo here
+       ensures it is available when Flutter tries to render Arabic text. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Set Cairo as the page font so the browser loads and caches it */
+    html, body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
+
+    /* Hidden preloader — forces all 4 Cairo weights to be downloaded
+       before Flutter initializes, so CanvasKit finds them in cache */
+    #_cairo_preload {
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+      font-family: 'Cairo', sans-serif;
+    }
+  </style>
 </head>
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <!-- Force-render hidden Arabic text in all weights to trigger font download -->
+  <div id="_cairo_preload" aria-hidden="true">
+    <span style="font-weight:400">أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ</span>
+    <span style="font-weight:600">أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ</span>
+    <span style="font-weight:700">أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ</span>
+    <span style="font-weight:800">أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ</span>
+  </div>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
